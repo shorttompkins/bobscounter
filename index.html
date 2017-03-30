@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Bob's Counter</title>
+    <style type="text/css">
+      body {
+        font-family: arial, sans serif;
+        font-size: 1em;
+      }
+      em {
+        display: inline-block;
+        padding: .25em;
+        background-color: #f0f0f0;
+        font-style: normal;
+        border: dotted 1px red;
+        color: red;
+        font-family: monospace;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body style="background-color: #ffffff;">
+    <h1>Welcome!</h1>
+    <p>PropX Delivered:</p>
+    <h1 id="counter"></h1>
+    <p>lbs of sand since March 1, 2017!</p>
+
+    <hr size="1" />
+
+    <p style="width: 800px;">
+      <strong>Notes:</strong><br/>
+      As of March 1, 2017 - with a starting balance of 1,400,000,000 lbs of sand, adding 154 lbs of sand every second, as of right now the new balance is above.<br/><br/>
+      Every random amount of seconds (between 2 1/2 and 6 1/2) the new balance will be computed, effectively taking the balance as of that exact moment and computing the difference from the last time it was updated and rolling the counter up that much more. I.e. if 4 seconds have passed then it would be 154*4 or 616 additional lbs added to the total.
+      <br/><br/>
+      Repeat forever.
+    </p>
+
+    <p style="width: 800px;">
+      <strong>Configuration Options:</strong><br/>
+      <em>startTime:</em> 3/1/2017  - can be any date, just increases the total amount you see when the page loads<br/><br/>
+      <em>startAmount:</em> 1400000000  - the starting balance as of the date above. The amount of seconds between the startTime and now will be computed using <em>incrementAmount</em> (below) and then added onto the <em>startAmount</em>.<br/><br/>
+      <em>incrementAmount:</em> 154 - the total lbs to increment per second (both from the <em>startTime</em> and every iteration forward).<br/><br/>
+      <em>min_recount</em>, <em>max_recount</em> - range in milliseconds that the counter will randomly update with the new total.<br/><br/>
+      <em>animate_from</em> 0 - the starting value of the main counter the instant the page loads. 0 = super fast counter since it needs to get up to the grand total and thats a large number. The larger this starting number is the slower the animation countUp period will appear to be. (in the future, its best to increase this amount so the countUp isnt trying to animate from 0 - 10,000,000,000 for example)
+    </p>
+
+
+    <script type="text/javascript" src="countup.min.js"></script>
+    <script type="text/javascript">
+      var startTime = new Date('3/1/2017'),
+        startAmount = 1400000000,            // starting balance as of startTime (above)
+        incrementAmount = 154;               // lbs per second to compute and increment the startAmount
+        min_recount = 2500,                  // random time between animating recounts: i.e. 2.5 seconds - 6.5 seconds
+        max_recount = 6500,
+        animate_from = 0                     // initial amount you want the animated counter to start at
+
+
+      // ***********************************************************************//
+      // DONT TOUCH BELOW!! //
+      // ***********************************************************************//
+      var nowTime = new Date(Date.now()),
+        sinceTime = Math.abs((startTime.getTime() - nowTime.getTime()) / 1000),
+        startTotal = startAmount + (sinceTime * incrementAmount);
+
+      var numAnim = new CountUp("counter", animate_from, startTotal);
+      numAnim.start(startUpdateTimer);
+
+      function startUpdateTimer() {
+        var nextUpdate = Math.floor(Math.random() * (max_recount - min_recount)) + min_recount;
+        window.setTimeout(function(){
+          newNowTime = new Date(Date.now());
+          sinceTime = Math.abs((nowTime.getTime() - newNowTime.getTime()) / 1000),
+          newTotal = startTotal + (sinceTime * incrementAmount);
+          numAnim.update(newTotal);
+        }, nextUpdate);
+      }
+
+    </script>
+  </body>
+</html>
