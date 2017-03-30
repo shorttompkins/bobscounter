@@ -1,5 +1,9 @@
 # Bob's Counter
 
+## Demo:
+
+https://jsfiddle.net/jkat98/arur4fdc/
+
 ## To Use:
  * Include `countup.min.js` on the page (before the JS snippet)
  * Include the HTML element that you want to be the counter:
