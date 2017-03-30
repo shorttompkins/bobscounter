@@ -7,16 +7,6 @@
         font-family: arial, sans serif;
         font-size: 1em;
       }
-      em {
-        display: inline-block;
-        padding: .25em;
-        background-color: #f0f0f0;
-        font-style: normal;
-        border: dotted 1px red;
-        color: red;
-        font-family: monospace;
-        border-radius: 4px;
-      }
     </style>
   </head>
   <body style="background-color: #ffffff;">
@@ -35,21 +25,14 @@
       Repeat forever.
     </p>
 
-    <p style="width: 800px;">
-      <strong>Configuration Options:</strong><br/>
-      <em>startTime:</em> 3/1/2017  - can be any date, just increases the total amount you see when the page loads<br/><br/>
-      <em>startAmount:</em> 1400000000  - the starting balance as of the date above. The amount of seconds between the startTime and now will be computed using <em>incrementAmount</em> (below) and then added onto the <em>startAmount</em>.<br/><br/>
-      <em>incrementAmount:</em> 154 - the total lbs to increment per second (both from the <em>startTime</em> and every iteration forward).<br/><br/>
-      <em>min_recount</em>, <em>max_recount</em> - range in milliseconds that the counter will randomly update with the new total.<br/><br/>
-      <em>animate_from</em> 0 - the starting value of the main counter the instant the page loads. 0 = super fast counter since it needs to get up to the grand total and thats a large number. The larger this starting number is the slower the animation countUp period will appear to be. (in the future, its best to increase this amount so the countUp isnt trying to animate from 0 - 10,000,000,000 for example)
-    </p>
-
 
     <script type="text/javascript" src="countup.min.js"></script>
     <script type="text/javascript">
+      // CONFIGURATION OPTIONS: //
+      // ---------------------- //
       var startTime = new Date('3/1/2017'),
         startAmount = 1400000000,            // starting balance as of startTime (above)
-        incrementAmount = 154;               // lbs per second to compute and increment the startAmount
+        incrementAmount = 154,               // lbs per second to compute and increment the startAmount
         min_recount = 2500,                  // random time between animating recounts: i.e. 2.5 seconds - 6.5 seconds
         max_recount = 6500,
         animate_from = 0                     // initial amount you want the animated counter to start at
