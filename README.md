@@ -1,8 +1,14 @@
 # Bob's Counter
 
 ## To Use:
- * Include `countup.min.js` in the page (before the snippet)
- * Include the following code snippet:
+ * Include `countup.min.js` on the page (before the JS snippet)
+ * Include the HTML element that you want to be the counter:
+
+ ```html
+ <h1 id="counter"></h1>
+ ```
+
+ * Include the following JavaScript code snippet:
 
 
  ````javascript
@@ -40,6 +46,8 @@
  ````
 
 ## Configuration Options:
+
+__The only requirement in the HTML is that the `id` of the element needs to be `counter`.__
 
  - `startTime:` 3/1/2017 - can be any date, just increases the total amount you see when the page loads
  - `startAmount:` 1400000000  - the starting balance as of the date above. The amount of seconds between the `startTime` and now will be computed using `incrementAmount` (below) and then added onto the `startAmount`
