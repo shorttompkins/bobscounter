@@ -48,7 +48,11 @@
       var numAnim = new CountUp("counter", animate_from, startTotal);
       numAnim.start(startUpdateTimer);
 
-      function startUpdateTimer() {
+
+
+
+
+      function startUpDateTimer() {
         var nextUpdate = Math.floor(Math.random() * (max_recount - min_recount)) + min_recount;
         window.setTimeout(function(){
           newNowTime = new Date(Date.now());
